@@ -44,58 +44,58 @@ export function auditBiometricSignature(keystrokes: CadenceSample[]): boolean {
 }`
 };
 
-// --- DEFAULT INITIAL ARTICLES (African Tech & Hiring Focus) ---
+// --- DEFAULT INITIAL ARTICLES (Global Talent & Hiring Focus) ---
 const DEFAULT_ARTICLES: Article[] = [
   {
     id: 'post-1',
-    title: 'Why Global Companies Are Hiring Top Software Engineers from Africa',
-    category: 'AFRICAN TECH',
+    title: 'Why Global Organizations Are Hiring Top African and International Talent',
+    category: 'GLOBAL TALENT',
     author: 'Sylvia Duruson',
     date: 'September 2026',
     readTime: '4 min read',
     image: 'assets/images/why_clients.jpg',
-    summary: 'From Lagos and Nairobi to Cape Town and Kigali, exceptional African developers are building critical infrastructure for global tech teams.',
-    content: `The global technology landscape has changed. Today, some of the world's most talented, hardworking, and innovative software engineers are based in tech hubs across Africa.
+    summary: 'From Lagos and Nairobi to Cape Town and Kigali, exceptional professionals across engineering, design, and operations are scaling global teams.',
+    content: `The global workforce landscape has fundamentally shifted. Today, some of the world's most talented, hardworking, and innovative professionals are based in emerging hubs across Africa and globally.
 
-Cities like Lagos, Nairobi, Cape Town, Accra, and Kigali are home to developers who have built high-scale payment gateways, offline-first mobile apps, and distributed microservices handling millions of daily transactions.
+Cities like Lagos, Nairobi, Cape Town, Accra, and Kigali are home to builders and operators who have scaled cross-border payment networks, customer operations desks, enterprise design systems, and resilient engineering platforms.
 
-When companies hire verified talent through Northline and Skillr, they get engineers who understand real-world resilience, high-performance architecture, and cross-border collaboration from day one.
+When companies hire verified talent through Northline and Skillr, they secure professionals who bring real-world resilience, high capability, and immediate cultural alignment from day one.
 
-With strong English fluency, compatible timezones with Europe and the Americas, and unmatched problem-solving grit, African tech talent is driving real impact on high-performing engineering teams.`
+With strong English fluency, convenient workday overlaps with Europe and the Americas, and unmatched problem-solving grit, global talent from Africa is driving real, measurable impact.`
   },
   {
     id: 'post-2',
-    title: 'How Anti-Cheat Testing Eliminates Guesswork in Tech Hiring',
+    title: 'How Practical Skill Testing Eliminates Guesswork in Global Hiring',
     category: 'HIRING GUIDE',
     author: 'Juliet Duruson',
     date: 'September 2026',
     readTime: '5 min read',
     image: 'assets/images/mockup_laptop_ui.jpg',
-    summary: 'Traditional resume screening wastes hundreds of hours. Live coding tests with anti-cheat protection give hiring managers real confidence.',
-    content: `Most tech hiring processes rely heavily on resumes and unmonitored take-home assignments. But resumes often tell you what someone knows how to write on paper, not what they can build in production.
+    summary: 'Traditional resume filtering wastes hundreds of hours. Live capability assessments with anti-cheat protection give hiring managers real confidence.',
+    content: `Most hiring processes rely heavily on resumes and unmonitored take-home assignments. But resumes often tell you what someone knows how to write on paper, not what they can actually deliver in real work environments.
 
-Skillr changes this by putting candidates into a realistic coding sandbox where their actual problem-solving and coding ability are tested in real time.
+Skillr changes this by placing candidates into realistic execution sandboxes where their problem-solving and domain competence are evaluated objectively.
 
-With automated test cases, code quality rubrics, and anti-cheat verification, engineering leaders receive a clear, ranked shortlist of top performers in just 72 hours.
+With automated scoring, quality rubrics, and anti-cheat verification, leadership teams receive a clear, ranked shortlist of top performers in just 72 hours.
 
-This saves engineering teams dozens of wasted interview hours and guarantees that every hire has proven technical ability before joining the team.`
+This saves teams dozens of wasted interview hours and guarantees that every hire has proven ability before joining your organization.`
   },
   {
     id: 'post-3',
-    title: 'Building High-Performing Remote Teams Across Time Zones',
-    category: 'ENGINEERING',
+    title: 'Building High-Performing Distributed Teams Across Time Zones',
+    category: 'LEADERSHIP & OPS',
     author: 'Northline Editorial',
     date: 'August 2026',
     readTime: '4 min read',
     image: 'assets/images/mockup_brand_kit.jpg',
-    summary: 'Simple best practices for seamless asynchronous collaboration between African engineers and global engineering teams.',
-    content: `Running a successful remote team does not require everyone to sit in the same timezone. It requires clear communication, great documentation, and engineers who take ownership of their tasks.
+    summary: 'Best practices for seamless asynchronous collaboration, documentation, and cross-border operational excellence.',
+    content: `Running a successful distributed team does not require everyone to sit in the same room. It requires clear communication, great documentation, and team members who take true ownership of their deliverables.
 
-African tech hubs operate conveniently within GMT+0 to GMT+3, offering significant workday overlap with European teams and easy coordination with US East Coast mornings.
+Emerging talent hubs operate conveniently within GMT+0 to GMT+3, offering significant workday overlap with European teams and easy coordination with US East Coast mornings.
 
-By establishing asynchronous standups, clear pull request guidelines, and measurable sprint goals, distributed engineering teams ship faster and with higher morale.
+By establishing asynchronous check-ins, clear task definitions, and measurable quarterly milestones, distributed teams ship faster with higher morale and long-term retention.
 
-At Northline, we prepare all candidates with remote work best practices so they integrate into existing engineering workflows from day one.`
+At Northline, we prepare all candidates with remote work best practices so they integrate into existing team workflows seamlessly from day one.`
   }
 ];
 
@@ -366,7 +366,7 @@ function initFormHandlers(): void {
   if (newsletterForm) {
     newsletterForm.addEventListener('submit', (e: SubmitEvent) => {
       e.preventDefault();
-      showToast('Subscribed! You will receive our monthly tech updates.');
+      showToast('Subscribed! You will receive our monthly global talent updates.');
       newsletterForm.reset();
     });
   }
@@ -517,7 +517,7 @@ function openArticleReader(articleId: string): void {
 
     <div class="reader-footer-cta">
       <div class="reader-footer-inner">
-        <h4>Looking to hire verified African tech talent?</h4>
+        <h4>Looking to hire verified global talent?</h4>
         <p>Get a ranked shortlist of tested candidates delivered in 72 hours.</p>
         <button class="btn btn-primary" data-action="open-booking-modal">Book a Free Consultation</button>
       </div>
@@ -684,7 +684,7 @@ function setupAdminPanelHandlers(): void {
         currentArticles[existingIndex] = {
           ...currentArticles[existingIndex],
           title: titleInput.value.trim(),
-          category: categoryInput?.value || 'AFRICAN TECH',
+          category: categoryInput?.value || 'GLOBAL TALENT',
           author: authorInput?.value.trim() || 'Northline Editorial',
           readTime: readTimeInput?.value.trim() || '4 min read',
           image: selectedImage,
@@ -698,7 +698,7 @@ function setupAdminPanelHandlers(): void {
       const newArticle: Article = {
         id: `post-${Date.now()}`,
         title: titleInput.value.trim(),
-        category: categoryInput?.value || 'AFRICAN TECH',
+        category: categoryInput?.value || 'GLOBAL TALENT',
         author: authorInput?.value.trim() || 'Northline Editorial',
         date: currentDate,
         readTime: readTimeInput?.value.trim() || '5 min read',

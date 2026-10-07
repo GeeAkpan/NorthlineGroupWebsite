@@ -4,50 +4,50 @@ import { Marquee } from "@/components/ui/marquee-01-utils/marquee";
 const reviews = [
   {
     name: "Marcus Reynolds",
-    username: "VP of Engineering, Series B Fintech",
-    body: "“Before Northline, we spent weeks reading resumes. With Skillr verification, our first two hires were top scorers on their assessment and delivered from day one.”",
-    profile: "assets/images/avatar_marcus.jpg",
+    username: "VP of People & Operations, Global SaaS",
+    body: "“Before Northline, we spent weeks reading unverified resumes. With Skillr testing, our first three hires across operations and engineering scored in the top 5% and delivered immediate impact.”",
+    profile: "assets/images/avatar_david.jpg",
     tag: "Verified Hire"
   },
   {
     name: "Amara Okafor",
-    username: "Staff Backend Engineer, Lagos",
-    body: "“Taking one Skillr assessment and receiving three great international offers saved me months of repetitive take-home challenges.”",
-    profile: "assets/images/avatar_amara.jpg",
+    username: "Operations & Client Success Lead, Lagos",
+    body: "“Taking one Skillr assessment and receiving multiple international offers saved me months of repetitive screening rounds. The team advocated for fair global compensation.”",
+    profile: "assets/images/avatar_folake.jpg",
     tag: "Placed in 72h"
   },
   {
-    name: "Kofi Mensah",
-    username: "Head of AI, Accra",
-    body: "“Northline represented me with complete transparency. They understand senior African engineering talent and advocate for true market rates.”",
-    profile: "assets/images/avatar_kofi.jpg",
-    tag: "Top Engineer"
+    name: "Kenji Takahashi",
+    username: "Principal AI & Data Architect, Tokyo",
+    body: "“Northline represented me with complete professionalism. They connect world-class specialists directly to high-caliber leadership teams looking for proven ability.”",
+    profile: "assets/images/avatar_chidi.jpg",
+    tag: "Top Specialist"
   },
   {
     name: "Folake Adebayo",
-    username: "CTO, Enterprise Payments Platform",
-    body: "“The candidate score reports are genuinely useful. We skipped two rounds of technical interviews because Skillr had already tested real skills.”",
+    username: "Managing Director, Financial Technology",
+    body: "“The candidate capability reports are exceptional. We cut our hiring cycle by two weeks because Skillr had already tested real problem-solving capabilities.”",
     profile: "assets/images/avatar_folake.jpg",
-    tag: "Hired 4 Engineers"
+    tag: "Hired 6 Roles"
   },
   {
     name: "David Ndlovu",
-    username: "Cloud Architect, Cape Town",
-    body: "“The proctored assessment was straightforward and fair. It let me show real distributed systems architecture instead of a whiteboard riddle.”",
+    username: "Cloud Infrastructure Architect, Cape Town",
+    body: "“The proctored skill challenge was practical and objective. It gave me the platform to demonstrate high-scale architecture instead of answering arbitrary quiz questions.”",
     profile: "assets/images/avatar_david.jpg",
     tag: "Verified Talent"
   },
   {
-    name: "Zainab Al-Hassan",
-    username: "Lead Product Designer, Nairobi",
-    body: "“Northline connected me to a high-growth US team within 4 days. The process was fast, respectful, and focused purely on output.”",
-    profile: "assets/images/avatar_zainab.jpg",
+    name: "Sofia Mendoza",
+    username: "Lead Product & UX Designer, Nairobi",
+    body: "“Northline placed me with an international design and product organization within 4 days. The process was transparent, respectful, and focused purely on real design output.”",
+    profile: "assets/images/avatar_folake.jpg",
     tag: "Placed in 4 Days"
   },
   {
     name: "Chidi Okonkwo",
-    username: "Engineering Director, AI Infrastructure Startup",
-    body: "“Every engineer we interviewed through Northline was exceptionally sharp, communicative, and ready to ship on day one.”",
+    username: "Global Talent Director, Scale-up Ventures",
+    body: "“Every professional we interviewed through Northline was exceptionally sharp, articulate, and ready to contribute from day one. Their 90-day retention rate is unmatched.”",
     profile: "assets/images/avatar_chidi.jpg",
     tag: "100% Retention"
   }
