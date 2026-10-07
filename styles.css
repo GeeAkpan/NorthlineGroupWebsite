@@ -18,12 +18,18 @@
   }
 }
 
-.animate-marquee {
-  animation: marquee var(--duration, 40s) linear infinite;
-}
+/* Layered so Tailwind's [animation-direction:reverse] utility (used on the
+   second testimonial row) can still override the shorthand `animation`
+   below — unlayered CSS always beats @layer utilities regardless of
+   source order or specificity. */
+@layer base {
+  .animate-marquee {
+    animation: marquee var(--duration, 40s) linear infinite;
+  }
 
-.animate-marquee-vertical {
-  animation: marquee-vertical var(--duration, 40s) linear infinite;
+  .animate-marquee-vertical {
+    animation: marquee-vertical var(--duration, 40s) linear infinite;
+  }
 }
 
 /* ==========================================================================
@@ -92,10 +98,16 @@
 }
 
 /* Base Reset */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* Wrapped in @layer so Tailwind's utility classes (used by the React
+   testimonial components) can still win on margin/padding/box-sizing —
+   an unlayered reset here would always beat @layer utilities regardless
+   of specificity. */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 }
 
 html {
@@ -290,34 +302,6 @@ button {
 }
 
 /* ==========================================================================
-   TOP ANNOUNCEMENT BAR
-   ========================================================================== */
-
-.top-announcement {
-  background-color: var(--c-navy-dark);
-  color: var(--c-yellow);
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
-  letter-spacing: 0.06em;
-  padding: 7px 0;
-  overflow: hidden;
-  border-bottom: 1px solid rgba(255, 195, 6, 0.15);
-  white-space: nowrap;
-}
-
-.announcement-track {
-  display: flex;
-  gap: 40px;
-  animation: announcement-scroll 32s linear infinite;
-  width: max-content;
-}
-
-@keyframes announcement-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-/* ==========================================================================
    HEADER NAVIGATION
    ========================================================================== */
 
@@ -373,7 +357,7 @@ button {
 }
 
 .nav-link:hover {
-  color: #0F3823;
+  color: var(--c-navy);
 }
 
 .nav-link::after {
@@ -383,7 +367,7 @@ button {
   left: 0;
   width: 0;
   height: 2px;
-  background: #A3E635;
+  background: var(--c-yellow);
   transition: width var(--trans-smooth);
 }
 
@@ -525,13 +509,13 @@ button {
 }
 
 .sym-dot.green {
-  background-color: #A3E635;
+  background-color: var(--c-mint);
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
 
 .sym-dot.dark {
-  background-color: #0F3823;
+  background-color: var(--c-navy);
   margin-left: 2px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
@@ -569,20 +553,20 @@ button {
 }
 
 .btn-dark-pill {
-  background-color: #0F3823;
+  background-color: var(--c-navy);
   color: #FFFFFF;
   font-weight: 700;
   border-radius: var(--radius-pill);
   padding: 16px 32px;
-  box-shadow: 0 10px 25px rgba(15, 56, 35, 0.25);
+  box-shadow: 0 10px 25px rgba(23, 43, 54, 0.25);
   transition: all var(--trans-smooth);
 }
 
 .btn-dark-pill:hover {
-  background-color: #172B36;
-  color: #CCFF00;
+  background-color: var(--c-navy-dark);
+  color: var(--c-yellow);
   transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(15, 56, 35, 0.35);
+  box-shadow: 0 14px 30px rgba(23, 43, 54, 0.35);
 }
 
 .btn-text-underline {
@@ -598,8 +582,8 @@ button {
 }
 
 .btn-text-underline:hover {
-  color: #0F3823;
-  border-color: #A3E635;
+  color: var(--c-navy-dark);
+  border-color: var(--c-yellow);
 }
 
 /* Right Hero Signature Photo Cluster */
@@ -675,96 +659,38 @@ button {
   display: block;
 }
 
-/* Floating Sparkle Stars */
-.sparkle-stars-wrap {
+/* Compass Emblem Accent (brand mark motif) */
+.compass-accent-wrap {
   position: absolute;
-  bottom: -15px;
-  right: -25px;
-  display: flex;
-  align-items: flex-end;
+  bottom: -18px;
+  right: -18px;
   z-index: 10;
   pointer-events: none;
+  filter: drop-shadow(0 8px 16px rgba(23, 43, 54, 0.25));
 }
 
-.star-main {
-  width: 48px;
-  height: 48px;
-  filter: drop-shadow(0 4px 8px rgba(163, 230, 53, 0.4));
-  animation: pulse-star 3s ease-in-out infinite alternate;
-}
-
-.star-mini {
-  width: 24px;
-  height: 24px;
-  margin-left: -8px;
-  margin-bottom: 22px;
-  filter: drop-shadow(0 2px 4px rgba(163, 230, 53, 0.3));
-  animation: pulse-star 3s ease-in-out 1.5s infinite alternate;
-}
-
-@keyframes pulse-star {
-  0% { transform: scale(0.9) rotate(0deg); }
-  100% { transform: scale(1.1) rotate(12deg); }
-}
-
-/* Rotating Stamp / Seal Badge */
-.hero-stamp-badge {
-  position: absolute;
-  bottom: 20px;
-  left: 210px;
-  width: 120px;
-  height: 120px;
-  z-index: 20;
-  cursor: pointer;
+.compass-accent-badge {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 2px solid var(--c-yellow);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform var(--trans-smooth);
+  padding: 14px;
+  animation: compass-float 5s ease-in-out infinite;
 }
 
-.hero-stamp-badge:hover {
-  transform: scale(1.08);
-}
-
-.stamp-svg-wrap {
+.compass-accent-icon {
   width: 100%;
   height: 100%;
-  animation: rotate-seal 16s linear infinite;
+  object-fit: contain;
 }
 
-.stamp-seal-path {
-  fill: #0F3823;
-  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
-}
-
-.stamp-text {
-  font-family: var(--font-brand);
-  font-size: 8.5px;
-  font-weight: 800;
-  fill: #FFFFFF;
-  letter-spacing: 2px;
-}
-
-.stamp-center-btn {
-  position: absolute;
-  width: 44px;
-  height: 44px;
-  background-color: #CCFF00;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  transition: transform var(--trans-fast);
-}
-
-.hero-stamp-badge:hover .stamp-center-btn {
-  transform: scale(1.1) rotate(-15deg);
-}
-
-@keyframes rotate-seal {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+@keyframes compass-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
 }
 
 /* ==========================================================================
@@ -1523,6 +1449,7 @@ button {
 
 .talent-filter-bar {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   background: var(--c-gray-blue);
   padding: 6px;
@@ -1679,248 +1606,6 @@ button {
   padding: 2px 7px;
   border-radius: 4px;
   border: 1px solid rgba(255, 195, 6, 0.3);
-}
-
-/* ==========================================================================
-   INTERACTIVE SIMULATOR CONSOLE
-   ========================================================================== */
-
-.section-simulator {
-  background: var(--c-navy-dark);
-  color: white;
-  padding: 100px 0;
-}
-
-.simulator-console {
-  background: var(--c-navy);
-  border: 1.5px solid var(--c-navy-border);
-  border-radius: var(--radius-xl);
-  display: grid;
-  grid-template-columns: 360px 1fr;
-  margin-top: 50px;
-  overflow: hidden;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
-}
-
-.sim-sidebar {
-  background: #112028;
-  border-right: 1px solid var(--c-navy-border-subtle);
-  padding: 28px 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-.sim-sidebar-title {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--c-yellow);
-  letter-spacing: 0.08em;
-  margin-bottom: 16px;
-  padding-left: 6px;
-}
-
-.sim-tracks {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 24px;
-}
-
-.sim-track-btn {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: var(--radius-md);
-  padding: 12px 14px;
-  text-align: left;
-  color: white;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  transition: all var(--trans-fast);
-}
-
-.sim-track-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 195, 6, 0.3);
-}
-
-.sim-track-btn.active {
-  background: var(--c-navy-card);
-  border-color: var(--c-yellow);
-  box-shadow: 0 0 16px var(--c-yellow-glow);
-}
-
-.track-icon {
-  font-size: 1.3rem;
-}
-
-.track-name {
-  font-size: 0.88rem;
-  font-weight: 700;
-}
-
-.track-tech {
-  font-size: 0.7rem;
-  color: var(--c-gray-blue);
-}
-
-.proctor-monitor-panel {
-  background: #081116;
-  border: 1px solid rgba(255, 195, 6, 0.2);
-  border-radius: var(--radius-md);
-  padding: 16px;
-  margin-top: auto;
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-}
-
-.monitor-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--c-yellow);
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
-.telemetry-items {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.t-item {
-  display: flex;
-  justify-content: space-between;
-  color: #8fa897;
-}
-
-.t-val.mint {
-  color: var(--c-mint);
-  font-weight: 700;
-}
-
-.sim-main-display {
-  padding: 36px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.sim-display-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding-bottom: 18px;
-}
-
-.sim-cand-id {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--c-yellow);
-}
-
-.sim-role-title {
-  font-size: 1.6rem;
-  font-weight: 800;
-  margin-top: 4px;
-}
-
-.sim-composite-score {
-  text-align: right;
-}
-
-.score-number {
-  font-size: 2.3rem;
-  font-weight: 900;
-  color: var(--c-yellow);
-}
-
-.score-max {
-  font-size: 1.1rem;
-  color: var(--c-gray-blue);
-}
-
-.percentile-pill {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  font-weight: 700;
-  background: rgba(255, 195, 6, 0.18);
-  color: var(--c-yellow);
-  padding: 3px 10px;
-  border-radius: var(--radius-pill);
-  margin-top: 4px;
-  display: inline-block;
-}
-
-.sim-skills-breakdown {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.skill-meter-row {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.skill-meter-meta {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.82rem;
-  font-weight: 600;
-}
-
-.meter-track {
-  height: 7px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.meter-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--c-mint), var(--c-yellow));
-  border-radius: 4px;
-  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.sim-evidence-box {
-  background: #081116;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  font-family: var(--font-mono);
-  font-size: 0.76rem;
-}
-
-.evidence-box-header {
-  background: rgba(255, 255, 255, 0.04);
-  padding: 8px 14px;
-  display: flex;
-  justify-content: space-between;
-  color: var(--c-gray-blue);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.evidence-box-header code {
-  color: var(--c-yellow);
-}
-
-.evidence-box-body pre {
-  padding: 14px;
-  color: #a7f3d0;
-  line-height: 1.55;
-  white-space: pre-wrap;
-}
-
-.sim-actions {
-  display: flex;
-  gap: 14px;
 }
 
 /* ==========================================================================
@@ -2372,92 +2057,15 @@ button {
 }
 
 .logo-item {
-  font-size: 1.1rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  color: #7a94a5;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--c-blue-light);
   transition: color var(--trans-fast);
 }
 
 .logo-item:hover {
   color: var(--c-navy);
-}
-
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 30px;
-}
-
-.testimonial-card {
-  background: white;
-  border: 1px solid var(--c-gray-blue);
-  border-radius: var(--radius-xl);
-  padding: 36px 30px;
-  display: flex;
-  flex-direction: column;
-  box-shadow: var(--shadow-sm);
-}
-
-.featured-testimonial {
-  background: var(--c-navy);
-  color: white;
-  border-color: var(--c-navy-border);
-}
-
-.stars-row {
-  color: var(--c-yellow);
-  font-size: 1.1rem;
-  letter-spacing: 2px;
-  margin-bottom: 16px;
-}
-
-.quote-text {
-  font-size: 1.05rem;
-  line-height: 1.65;
-  margin-bottom: 26px;
-  flex-grow: 1;
-}
-
-.featured-testimonial .quote-text {
-  color: var(--c-text-primary-light);
-}
-
-.quotee-meta {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.quotee-avatar {
-  width: 44px;
-  height: 44px;
-  background: var(--c-cream);
-  color: var(--c-navy);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-}
-
-.featured-testimonial .quotee-avatar {
-  background: var(--c-yellow);
-  color: var(--c-navy);
-}
-
-.quotee-name {
-  font-weight: 800;
-  font-size: 0.95rem;
-}
-
-.quotee-title {
-  font-size: 0.78rem;
-  color: var(--c-text-secondary-dark);
-}
-
-.featured-testimonial .quotee-title {
-  color: var(--c-gray-blue);
 }
 
 /* ==========================================================================
@@ -2497,7 +2105,15 @@ button {
 }
 
 .g-icon {
-  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(255, 195, 6, 0.12);
+  color: var(--c-yellow);
 }
 
 .team-photo-wrap {
@@ -2753,10 +2369,18 @@ button {
   height: 44px;
 }
 
+.footer-brand-motto {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--c-text-primary-light);
+  margin-top: 16px;
+}
+
 .footer-tagline {
   font-size: 0.88rem;
   line-height: 1.6;
-  margin: 16px 0 20px;
+  margin: 8px 0 20px;
   max-width: 320px;
 }
 
@@ -3262,6 +2886,10 @@ button {
     grid-template-columns: 1fr;
     gap: 50px;
   }
+  .hero-content,
+  .hero-visual {
+    min-width: 0;
+  }
   .hero-mosaic-wrapper {
     justify-content: center;
   }
@@ -3271,8 +2899,6 @@ button {
   .problem-layout-grid,
   .why-split-container,
   .triple-photo-pathway-grid,
-  .simulator-console,
-  .testimonials-grid,
   .booking-split-wrapper,
   .leadership-grid {
     grid-template-columns: 1fr;
@@ -3335,5 +2961,37 @@ button {
   }
   .statement-quote {
     font-size: 1rem;
+  }
+
+  /* Hero photo cluster: scale the fixed-size composition to fit phone widths */
+  .hero-cluster-wrapper {
+    width: 100%;
+    max-width: 380px;
+    min-width: 0;
+    margin: 0 auto;
+  }
+  .cluster-left-card {
+    width: 56%;
+    height: auto;
+    aspect-ratio: 270 / 380;
+    flex-shrink: 1;
+  }
+  .cluster-right-stack {
+    width: 44%;
+    min-width: 0;
+  }
+  .frame-top,
+  .frame-bottom {
+    height: auto;
+    aspect-ratio: 250 / 125;
+  }
+  .frame-mid {
+    height: auto;
+    aspect-ratio: 250 / 120;
+  }
+  .compass-accent-badge {
+    width: 48px;
+    height: 48px;
+    padding: 10px;
   }
 }

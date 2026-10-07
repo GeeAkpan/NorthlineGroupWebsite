@@ -4,15 +4,15 @@ import { Marquee } from "@/components/ui/marquee-01-utils/marquee";
 const reviews = [
   {
     name: "Marcus Reynolds",
-    username: "VP of Engineering, Vertex Labs",
-    body: "“Before Northline, we spent weeks reading resumes. With Skillr verification, our first two hires were top scorers on their test and delivered from day one.”",
+    username: "VP of Engineering, Series B Fintech",
+    body: "“Before Northline, we spent weeks reading resumes. With Skillr verification, our first two hires were top scorers on their assessment and delivered from day one.”",
     profile: "assets/images/avatar_marcus.jpg",
     tag: "Verified Hire"
   },
   {
     name: "Amara Okafor",
     username: "Staff Backend Engineer, Lagos",
-    body: "“Taking one Skillr test and receiving three great international offers saved me months of repetitive take-home challenges.”",
+    body: "“Taking one Skillr assessment and receiving three great international offers saved me months of repetitive take-home challenges.”",
     profile: "assets/images/avatar_amara.jpg",
     tag: "Placed in 72h"
   },
@@ -25,30 +25,30 @@ const reviews = [
   },
   {
     name: "Folake Adebayo",
-    username: "CTO, Hyperion Fintech",
-    body: "“The code telemetry reports are game changing. We skipped two rounds of technical interviews because Skillr already tested real skills.”",
-    profile: "assets/images/avatar_zainab.jpg",
+    username: "CTO, Enterprise Payments Platform",
+    body: "“The candidate score reports are genuinely useful. We skipped two rounds of technical interviews because Skillr had already tested real skills.”",
+    profile: "assets/images/avatar_folake.jpg",
     tag: "Hired 4 Engineers"
   },
   {
     name: "David Ndlovu",
     username: "Cloud Architect, Cape Town",
-    body: "“The anti-cheat sandbox was straightforward and fair. It let me show real distributed systems architecture without tedious whiteboard riddles.”",
-    profile: "assets/images/talent_marcus.jpg",
+    body: "“The proctored assessment was straightforward and fair. It let me show real distributed systems architecture instead of a whiteboard riddle.”",
+    profile: "assets/images/avatar_david.jpg",
     tag: "Verified Talent"
   },
   {
     name: "Zainab Al-Hassan",
     username: "Lead Product Designer, Nairobi",
     body: "“Northline connected me to a high-growth US team within 4 days. The process was fast, respectful, and focused purely on output.”",
-    profile: "assets/images/talent_sofia.jpg",
+    profile: "assets/images/avatar_zainab.jpg",
     tag: "Placed in 4 Days"
   },
   {
     name: "Chidi Okonkwo",
-    username: "Engineering Director, Aether AI",
-    body: "“Every engineer we interviewed from Northline was exceptionally sharp, communicative, and ready to ship on day one.”",
-    profile: "assets/images/talent_kenji.jpg",
+    username: "Engineering Director, AI Infrastructure Startup",
+    body: "“Every engineer we interviewed through Northline was exceptionally sharp, communicative, and ready to ship on day one.”",
+    profile: "assets/images/avatar_chidi.jpg",
     tag: "100% Retention"
   }
 ];
@@ -70,7 +70,7 @@ const ReviewCard = ({
   tag?: string;
 }) => {
   return (
-    <Card className="relative h-full w-[330px] shrink-0 cursor-pointer overflow-hidden border border-[#DDE7ED] bg-white hover:border-[#172B36] hover:shadow-lg transition-all duration-300 p-5 rounded-2xl mx-2 flex flex-col justify-between select-none">
+    <Card className="relative h-full w-[330px] shrink-0 cursor-pointer overflow-hidden border border-[#E7EAED] bg-white hover:border-[#172B36] hover:shadow-lg transition-all duration-300 p-5 rounded-2xl mx-2 flex flex-col justify-between select-none">
       <CardContent className="p-0 flex flex-col gap-3">
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-row items-center gap-3">
@@ -97,7 +97,7 @@ const ReviewCard = ({
             </span>
           )}
         </div>
-        <p className="text-xs text-[#2B3A32] leading-relaxed text-left line-clamp-3 font-normal">{body}</p>
+        <p className="text-xs text-[#172B36] leading-relaxed text-left line-clamp-3 font-normal">{body}</p>
         <div className="text-[#FFC306] text-xs font-bold text-left tracking-wider">
           ★★★★★
         </div>

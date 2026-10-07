@@ -8,23 +8,6 @@ import ReactDOM from 'react-dom/client';
 import TestimonialMarquee from '@/components/ui/marquee-01';
 
 // --- TYPES & INTERFACES ---
-export interface SkillMetric {
-  name: string;
-  score: string;
-}
-
-export interface SimulatorTrack {
-  candId: string;
-  role: string;
-  score: string;
-  percentile: string;
-  skills: SkillMetric[];
-  evidence: string;
-  hash: string;
-}
-
-export type SimulatorTrackKey = 'fullstack' | 'aiml' | 'product' | 'devops';
-
 export type CodeSampleKey = 'code' | 'sys' | 'sec';
 
 export interface Article {
@@ -40,81 +23,6 @@ export interface Article {
 }
 
 // --- DATA DEFINITIONS ---
-const SIMULATOR_TRACKS: Record<SimulatorTrackKey, SimulatorTrack> = {
-  fullstack: {
-    candId: 'CANDIDATE DOSSIER: #NL-9942-ELENA',
-    role: 'Staff Full-Stack & Distributed Systems',
-    score: '98.4',
-    percentile: 'Top 0.8% Global',
-    skills: [
-      { name: 'Distributed Go/Rust Microservices', score: '99%' },
-      { name: 'System Architecture & Data Modeling', score: '98%' },
-      { name: 'Async Event Streaming (Kafka/Redis)', score: '96%' },
-      { name: 'Frontend React/TypeScript Core', score: '95%' }
-    ],
-    evidence: `// Skillr Proctored Execution Summary:
-[PASS] Test Suite: 32/32 tests passed in 118ms.
-[PASS] Concurrency: 10,000 virtual user burst handled with 0 race conditions.
-[PASS] Anti-Cheat AI Check: 100% original human problem solving.
-[PASS] Code Sandbox: O(log N) cache retrieval verified.`,
-    hash: '0x8F9C21A79DE44B'
-  },
-  aiml: {
-    candId: 'CANDIDATE DOSSIER: #NL-8831-KENJI',
-    role: 'Senior AI / ML Solutions Architect',
-    score: '99.1',
-    percentile: 'Top 0.4% Global',
-    skills: [
-      { name: 'LLM Fine-Tuning & Quantization', score: '99%' },
-      { name: 'Vector DBs & Hybrid Search', score: '98%' },
-      { name: 'PyTorch & GPU Acceleration', score: '97%' },
-      { name: 'AI Safety & Guardrails', score: '100%' }
-    ],
-    evidence: `// Skillr AI Benchmark Telemetry:
-[PASS] Model Latency: RAG pipeline optimized from 420ms to 48ms TTFT.
-[PASS] Precision Score: F1 0.962 on enterprise evaluation dataset.
-[PASS] Anti-Cheat Proctor: Keystroke cadence match confirmed at 99.8%.
-[PASS] Zero unauthorized external API calls detected during exam.`,
-    hash: '0x33B19E927A10FF'
-  },
-  product: {
-    candId: 'CANDIDATE DOSSIER: #NL-7715-SOFIA',
-    role: 'Lead Product Designer & Design Systems',
-    score: '97.6',
-    percentile: 'Top 1.2% Global',
-    skills: [
-      { name: 'Enterprise Design Systems', score: '98%' },
-      { name: 'UX Research & Conversion Flows', score: '97%' },
-      { name: 'Interactive Prototyping', score: '96%' },
-      { name: 'Design-to-Code Systems', score: '98%' }
-    ],
-    evidence: `// Skillr Design Simulation Dossier:
-[PASS] Accessibility: WCAG AAA compliance across 18 screen states.
-[PASS] Usability Rubric: Friction score reduced by 44% in simulated flow.
-[PASS] Anti-Cheat Audit: 100% original component architecture validated.
-[PASS] Time to Solution: Completed multi-tier design in 82 mins.`,
-    hash: '0x77AE419B8C5209'
-  },
-  devops: {
-    candId: 'CANDIDATE DOSSIER: #NL-6620-MARCUS',
-    role: 'Cloud Security & DevOps Lead',
-    score: '98.8',
-    percentile: 'Top 0.6% Global',
-    skills: [
-      { name: 'Kubernetes Multi-Cluster Management', score: '99%' },
-      { name: 'Terraform & Infrastructure-as-Code', score: '98%' },
-      { name: 'Zero-Trust Security Auditing', score: '97%' },
-      { name: 'CI/CD Automated Deployments', score: '98%' }
-    ],
-    evidence: `// Skillr Cloud Sandbox Telemetry:
-[PASS] Disaster Recovery: Automated failover executed in < 4.2 seconds.
-[PASS] Security Scan: 0 vulnerabilities detected in container config.
-[PASS] Anti-Cheat: Screen sandbox strictly contained with zero hooks.
-[PASS] Cost Optimization: Simulated cluster spend reduced by 36.8%.`,
-    hash: '0x992B104F5E66A1'
-  }
-};
-
 const CODE_SAMPLES: Record<CodeSampleKey, string> = {
   code: `// Skillr Proctored Execution Sandbox
 export async function verifyRateLimiter(reqStream: Stream): Promise<Metric> {
@@ -146,14 +54,14 @@ const DEFAULT_ARTICLES: Article[] = [
     date: 'September 2026',
     readTime: '4 min read',
     image: 'assets/images/why_clients.jpg',
-    summary: 'From Lagos and Nairobi to Cape Town and Kigali, world-class African developers are building critical infrastructure for global tech teams.',
+    summary: 'From Lagos and Nairobi to Cape Town and Kigali, exceptional African developers are building critical infrastructure for global tech teams.',
     content: `The global technology landscape has changed. Today, some of the world's most talented, hardworking, and innovative software engineers are based in tech hubs across Africa.
 
 Cities like Lagos, Nairobi, Cape Town, Accra, and Kigali are home to developers who have built high-scale payment gateways, offline-first mobile apps, and distributed microservices handling millions of daily transactions.
 
 When companies hire verified talent through Northline and Skillr, they get engineers who understand real-world resilience, high-performance architecture, and cross-border collaboration from day one.
 
-With strong English fluency, compatible timezones with Europe and the Americas, and unmatched problem-solving grit, African tech talent is driving real impact on world-class engineering teams.`
+With strong English fluency, compatible timezones with Europe and the Americas, and unmatched problem-solving grit, African tech talent is driving real impact on high-performing engineering teams.`
   },
   {
     id: 'post-2',
@@ -192,6 +100,7 @@ At Northline, we prepare all candidates with remote work best practices so they 
 ];
 
 const BLOG_STORAGE_KEY = 'northline_blog_articles_v2';
+let currentArticles: Article[] = [];
 
 // --- BLOG STORAGE HELPERS ---
 function loadArticles(): Article[] {
@@ -221,7 +130,6 @@ function saveArticlesToStorage(articles: Article[]): void {
 
 // --- INITIALIZATION ---
 function startApp(): void {
-  initSimulator();
   initTalentFilter();
   initFAQ();
   initModals();
@@ -247,65 +155,7 @@ function initTestimonialsMarquee(): void {
   }
 }
 
-// --- 1. SIMULATOR LOGIC ---
-function initSimulator(): void {
-  const simTrackBtns = document.querySelectorAll<HTMLButtonElement>('.sim-track-btn');
-  const simCandId = document.getElementById('simCandId');
-  const simRoleTitle = document.getElementById('simRoleTitle');
-  const simScoreNum = document.getElementById('simScoreNum');
-  const simPercentile = document.getElementById('simPercentile');
-  const simSkillsBreakdown = document.getElementById('simSkillsBreakdown');
-  const simEvidenceSnippet = document.getElementById('simEvidenceSnippet');
-
-  function renderSimulatorTrack(trackKey: SimulatorTrackKey): void {
-    const data = SIMULATOR_TRACKS[trackKey];
-    if (!data) return;
-
-    if (simCandId) simCandId.textContent = data.candId;
-    if (simRoleTitle) simRoleTitle.textContent = data.role;
-    if (simScoreNum) simScoreNum.textContent = data.score;
-    if (simPercentile) simPercentile.textContent = data.percentile;
-
-    if (simSkillsBreakdown) {
-      simSkillsBreakdown.innerHTML = data.skills
-        .map(
-          skill => `
-        <div class="skill-meter-row">
-          <div class="skill-meter-meta">
-            <span>${skill.name}</span>
-            <span class="highlight-yellow">${skill.score}</span>
-          </div>
-          <div class="meter-track">
-            <div class="meter-fill" style="width: ${skill.score};"></div>
-          </div>
-        </div>
-      `
-        )
-        .join('');
-    }
-
-    if (simEvidenceSnippet) {
-      simEvidenceSnippet.innerHTML = `<pre><code>${data.evidence}</code></pre>`;
-    }
-  }
-
-  if (simTrackBtns.length > 0) {
-    renderSimulatorTrack('fullstack');
-
-    simTrackBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        simTrackBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const track = btn.getAttribute('data-track') as SimulatorTrackKey;
-        if (track && SIMULATOR_TRACKS[track]) {
-          renderSimulatorTrack(track);
-        }
-      });
-    });
-  }
-}
-
-// --- 2. TALENT FILTER LOGIC ---
+// --- 1. TALENT FILTER LOGIC ---
 function initTalentFilter(): void {
   const filterBtns = document.querySelectorAll<HTMLButtonElement>('#talentFilterBar .filter-btn');
   const talentCards = document.querySelectorAll<HTMLElement>('#talentGrid .talent-editorial-card');
@@ -329,7 +179,7 @@ function initTalentFilter(): void {
   });
 }
 
-// --- 3. FAQ ACCORDION ---
+// --- 2. FAQ ACCORDION ---
 function initFAQ(): void {
   const faqItems = document.querySelectorAll<HTMLElement>('.faq-item');
   faqItems.forEach(item => {
@@ -353,7 +203,7 @@ function initFAQ(): void {
   });
 }
 
-// --- 4. MODALS & GENERAL EVENT LOGIC ---
+// --- 3. MODALS & GENERAL EVENT LOGIC ---
 function initModals(): void {
   const bookingModal = document.getElementById('bookingModal');
   const skillrModal = document.getElementById('skillrModal');
@@ -440,7 +290,7 @@ function initModals(): void {
   });
 }
 
-// --- 5. MOBILE DRAWER ---
+// --- 4. MOBILE DRAWER ---
 function initMobileMenu(): void {
   const mobileMenuBtn = document.getElementById('mobileMenuBtn');
   const mobileDrawer = document.getElementById('mobileDrawer');
@@ -461,7 +311,7 @@ function initMobileMenu(): void {
   }
 }
 
-// --- 6. FORM HANDLERS & TOASTS ---
+// --- 5. FORM HANDLERS & TOASTS ---
 export function showToast(message: string): void {
   const toastContainer = document.getElementById('toastContainer');
   if (!toastContainer) return;
@@ -524,13 +374,13 @@ function initFormHandlers(): void {
   const runDemoTestBtn = document.getElementById('runDemoTestBtn') as HTMLButtonElement | null;
   if (runDemoTestBtn) {
     runDemoTestBtn.addEventListener('click', () => {
-      runDemoTestBtn.innerHTML = 'Testing Sandbox...';
+      runDemoTestBtn.innerHTML = 'Running Assessment...';
       runDemoTestBtn.disabled = true;
       setTimeout(() => {
-        runDemoTestBtn.innerHTML = '✓ Anti-Cheat Verification: 100% Clean';
-        showToast('Proctored test passed! Candidate score: 98.4 / 100.');
+        runDemoTestBtn.innerHTML = 'Verified &bull; Ready for Review';
+        showToast('Sample assessment complete. This is the report your hiring team receives.');
         setTimeout(() => {
-          runDemoTestBtn.innerHTML = 'Run Anti-Cheat Benchmark';
+          runDemoTestBtn.innerHTML = 'Run Sample Assessment';
           runDemoTestBtn.disabled = false;
         }, 3000);
       }, 1200);
@@ -538,7 +388,7 @@ function initFormHandlers(): void {
   }
 }
 
-// --- 7. SCROLL NUMBER REVEAL COUNTERS ---
+// --- 6. SCROLL NUMBER REVEAL COUNTERS ---
 function initScrollCounters(): void {
   const counters = document.querySelectorAll<HTMLElement>('.counter');
   let animated = false;
@@ -576,9 +426,7 @@ function initScrollCounters(): void {
   }
 }
 
-// --- 8. DYNAMIC BLOG SYSTEM & ADMIN PANEL ---
-let currentArticles: Article[] = [];
-
+// --- 7. DYNAMIC BLOG SYSTEM & ADMIN PANEL ---
 function initBlogSystem(): void {
   currentArticles = loadArticles();
   renderPublicArticles();
